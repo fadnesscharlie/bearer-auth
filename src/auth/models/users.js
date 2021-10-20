@@ -31,7 +31,11 @@ const userModel = (sequelize, DataTypes) => {
 
         // #### TESTING THIS BY BREAKING IT
         // return jwt.sign(this.username, SECRET)
-        return jwt.sign({ username: this.username}, SECRET)
+        return jwt.sign(
+          { username: this.username}, 
+          SECRET,
+          { expiresIn: '10m' }
+          )
       },
       // set(TokenObj) {
       //   let token = jwt.sign(TokenObj, SECRET);
