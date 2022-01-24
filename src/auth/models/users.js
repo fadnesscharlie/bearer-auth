@@ -10,19 +10,24 @@ const SECRET = 'secretSauce'
 
 const userModel = (sequelize, DataTypes) => {
   const users = sequelize.define('User', {
+    // user_id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   unique: true
+    // },
     username: {
       type: DataTypes.STRING,
       allowNull : false,
-      unqiue: true
+      unique: true
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    // role: {
-    //   type:DataTypes.ENUM('user', 'writer', 'editor', 'admin'),
-    //   defaultValue: 'user'
-    // },
+    role: {
+      type: DataTypes.ENUM('user', 'writer', 'editor', 'admin'),
+      defaultValue: 'user'
+    },
     token: {
       type: DataTypes.VIRTUAL,
       get() {

@@ -4,6 +4,7 @@ const express = require('express');
 const authRouter = express.Router();
 
 const { users } = require('./models/index.js');
+const { list } = require('./models/index.js');
 
 // Auth
 // const User = require('./auth/models/users.js');
@@ -23,6 +24,30 @@ authRouter.post('/register', async (req, res, next) => {
     next(err.message);
   }
 });
+
+authRouter.post('/createTodos', async (req, res, next) => {
+  try {
+    let todos = await list.create(req.body);
+    const output = {
+      todo: todos,
+    };
+    res.status(201).json(output)
+  } catch (err) {
+    next(err.message)
+  }
+})
+
+authRouter.get('/todos', async (req, res, next) => {
+  const allTodos = await list.findAll({});
+  console.log('allUsers:', allTodos);
+
+  res.status(200).json(allTodos);
+
+
+  // res.status(200).send('Does this thing even work?')
+})
+
+
 
 authRouter.post('/signin', basicAuth(users), (req, res) => {
   try {

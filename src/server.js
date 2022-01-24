@@ -3,6 +3,7 @@
 // 3rd party resouces
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors')
 
 // Error Handlers/routes
 const errorHandlers = require('./error-handlers/500.js');
@@ -11,7 +12,7 @@ const authRouter = require('./auth/routes.js');
 
 // Express App
 const app = express();
-
+app.use(cors());
 app.use(morgan('dev'));
 
 app.use(express.json());

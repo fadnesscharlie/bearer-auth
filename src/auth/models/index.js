@@ -3,6 +3,7 @@
 require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 const userModel = require('./users.js');
+const todoListModel = require('./todoList.js')
 // console.log('userModel', userModel)
 
 // const DATABASE_URL = process.env.DATABASE_URL || 'postgres://localhost:5432/basic-auth';
@@ -22,5 +23,6 @@ const sequelize = new Sequelize(DATABASE_URL, sequelizeOptions);
 
 module.exports = {
   db: sequelize,
-  users: userModel(sequelize, DataTypes)
+  users: userModel(sequelize, DataTypes),
+  list: todoListModel(sequelize, DataTypes),
 }
